@@ -1,40 +1,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/registration"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
 
     <TextView
-        android:text="Реєстрація:"
-        android:textSize="50dp"
-        android:textColor="@color/small_text"
-        android:fontFamily="@font/josefinslab_bold"
-        android:layout_marginBottom="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/josefinslab_bold"
+        android:text="Реєстрація:"
+        android:textColor="@color/small_text"
+        android:textSize="50dp" />
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:textColor="@color/white"
         android:layout_marginBottom="15dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/josefinslab_bold"
         android:hint="Ім'я"
         android:minHeight="48dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/etSurname"
-        android:fontFamily="@font/josefinslab_bold"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/josefinslab_bold"
         android:hint="Прізвище"
         android:padding="10dp" />
 
@@ -51,11 +51,11 @@
 
     <EditText
         android:id="@+id/etLogin"
-        android:fontFamily="@font/josefinslab_bold"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/josefinslab_bold"
         android:hint="Логін"
         android:padding="10dp" />
 
@@ -72,12 +72,12 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/josefinslab_bold"
-        android:text="Далі"
         android:layout_width="300dp"
         android:layout_height="75dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/button"
+        android:fontFamily="@font/josefinslab_bold"
+        android:text="Далі"
         android:textColor="@android:color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </LinearLayout>
