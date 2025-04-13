@@ -6,7 +6,6 @@
     android:padding="32dp"
     android:background="@color/white">
 
-
     <TextView
         android:text="Реєстрація:"
         android:textSize="50dp"
