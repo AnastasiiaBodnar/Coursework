@@ -14,38 +14,32 @@ import com.google.firebase.auth.FirebaseUser;
 
 import client.MainClientActivity;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private EditText etName, etSurname, etPhone, etLogin, etPassword;
-    private Button btnRegister;
+    private EditText etLogin, etPassword;
+    private Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
-        etName = findViewById(R.id.etName);
-        etSurname = findViewById(R.id.etSurname);
-        etPhone = findViewById(R.id.etPhone);
         etLogin = findViewById(R.id.etLogin);
         etPassword = findViewById(R.id.etPassword);
-        btnRegister = findViewById(R.id.btnRegister);
+        btnNext = findViewById(R.id.btnNext);
 
-        btnRegister.setOnClickListener(view -> registerUser());
+        btnNext.setOnClickListener(view -> loginUser());
     }
 
-    private void registerUser() {
-        String name = etName.getText().toString().trim();
-        String surname = etSurname.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
+    private void loginUser() {
         String email = etLogin.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        if (name.isEmpty() || surname.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Будь ласка, заповніть усі поля", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -55,17 +49,14 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        // Firebase Auth
-        mAuth.createUserWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(RegistrationActivity.this, MainClientActivity.class);
+                        Toast.makeText(this, "Вхід успішний!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainClientActivity.class);
                         startActivity(intent);
                         finish();
-
                     } else {
                         Toast.makeText(this, "Помилка: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
