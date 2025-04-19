@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainClient"
     android:orientation="vertical"
     android:gravity="center"
@@ -7,17 +8,17 @@
     android:padding="32dp"
     android:background="@color/white">
 
+<FrameLayout
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    />
 
-    <TextView
-        android:text="Вхід:"
-        android:textSize="50dp"
-        android:textColor="@color/small_text"
-        android:fontFamily="@font/josefinslab_bold"
-        android:layout_marginBottom="60dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
-
-
-
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemPaddingBottom="10dp"
+        android:layout_height="56dp"/>
 </LinearLayout>

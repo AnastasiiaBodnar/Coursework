@@ -1,16 +1,30 @@
 package client;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.coursework.HomeFragment;
+import com.example.coursework.MastersFragment;
+import com.example.coursework.ProfileFragment;
 import com.example.coursework.R;
+import com.example.coursework.ServicesFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainClientActivity extends AppCompatActivity {
+
+    private BottomNavigationView bottomNavigationView;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +36,39 @@ public class MainClientActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        bottomNavigationView = findViewById(R.id.bottomNavView);
+        frameLayout = findViewById(R.id.frameLayout);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.navHome){
+
+                    loadFragment(new HomeFragment());
+
+                } else if (itemId == R.id.navServices) {
+                    loadFragment(new ServicesFragment());
+                }
+                else if (itemId == R.id.navMasters) {
+                    loadFragment(new MastersFragment());
+                }
+                else {
+                    loadFragment(new ProfileFragment());
+                }
+                return false;
+            }
+        });
+    }
+
+    private void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+
     }
 }
