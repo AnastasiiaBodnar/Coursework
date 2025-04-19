@@ -48,26 +48,36 @@ public class MainClientActivity extends AppCompatActivity {
 
                 if (itemId == R.id.navHome){
 
-                    loadFragment(new HomeFragment());
+                    loadFragment(new HomeFragment(),false);
 
                 } else if (itemId == R.id.navServices) {
-                    loadFragment(new ServicesFragment());
+                    loadFragment(new ServicesFragment(),false);
                 }
                 else if (itemId == R.id.navMasters) {
-                    loadFragment(new MastersFragment());
+                    loadFragment(new MastersFragment(),false);
                 }
                 else {
-                    loadFragment(new ProfileFragment());
+                    loadFragment(new ProfileFragment(),false);
                 }
-                return false;
+                return true;
             }
         });
+
+        loadFragment(new HomeFragment(),true);
     }
 
-    private void loadFragment(Fragment fragment){
+    private void loadFragment(Fragment fragment, boolean isAppInitialized){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frameLayout, fragment);
+
+        if(isAppInitialized){
+            fragmentTransaction.add(R.id.frameLayout, fragment);
+        }
+        else{
+            fragmentTransaction.replace(R.id.frameLayout, fragment);
+        }
+
+
         fragmentTransaction.commit();
 
     }
