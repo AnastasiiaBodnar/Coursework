@@ -26,7 +26,8 @@
         android:hint="Ім'я"
         android:minHeight="48dp"
         android:padding="10dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/small_text"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/etSurname"
@@ -36,6 +37,8 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/josefinslab_bold"
         android:hint="Прізвище"
+        android:textColor="@color/small_text"
+        android:textSize="20dp"
         android:padding="10dp" />
 
     <EditText
@@ -46,6 +49,8 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/josefinslab_bold"
         android:hint="Номер телефону"
+        android:textColor="@color/small_text"
+        android:textSize="20dp"
         android:inputType="phone"
         android:padding="10dp" />
 
@@ -57,6 +62,8 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/josefinslab_bold"
         android:hint="Логін"
+        android:textColor="@color/small_text"
+        android:textSize="20dp"
         android:padding="10dp" />
 
     <EditText
@@ -67,6 +74,8 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/josefinslab_bold"
         android:hint="Пароль"
+        android:textColor="@color/small_text"
+        android:textSize="20dp"
         android:inputType="textPassword"
         android:padding="10dp" />
 

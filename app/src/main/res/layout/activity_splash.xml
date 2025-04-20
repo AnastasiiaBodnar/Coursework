@@ -8,10 +8,10 @@
     android:background="@color/white">
 
     <ImageView
-        android:paddingLeft="9dp"
-        android:layout_width="315dp"
-        android:layout_height="286dp"
+        android:layout_width="wrap_content"
+        android:layout_height="305dp"
         android:layout_marginTop="60dp"
+        android:paddingLeft="9dp"
         android:src="@drawable/logo" />
 
     <TextView
@@ -36,9 +36,10 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="60dp"
         android:text="Вхід"
+        android:layout_marginStart="25dp"
         android:fontFamily="@font/josefinslab_bold"
         android:textStyle="bold"
         android:backgroundTint="@color/button"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        android:paddingLeft="30dp">
+        android:paddingLeft="40dp">
 
         <TextView
             android:layout_width="wrap_content"
