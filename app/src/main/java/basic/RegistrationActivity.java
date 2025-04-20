@@ -11,12 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coursework.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import client.MainClientActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     private EditText etName, etSurname, etPhone, etLogin, etPassword;
     private Button btnRegister;
@@ -27,6 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         etName = findViewById(R.id.etName);
         etSurname = findViewById(R.id.etSurname);
@@ -55,16 +61,29 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        // Firebase Auth
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(RegistrationActivity.this, MainClientActivity.class);
-                        startActivity(intent);
-                        finish();
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("firstName", name);
+                        userData.put("lastName", surname);
+                        userData.put("phone", phone);
+                        userData.put("email", email);
+                        userData.put("role", "client");
+
+                        db.collection("users").document(user.getUid())
+                                .set(userData)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(RegistrationActivity.this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegistrationActivity.this, MainClientActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(RegistrationActivity.this, "Помилка при збереженні даних: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                });
 
                     } else {
                         Toast.makeText(this, "Помилка: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
