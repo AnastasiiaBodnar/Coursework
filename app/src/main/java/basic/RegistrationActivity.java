@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import client.MainClientActivity;
+import com.example.coursework.NavActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -77,7 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 .set(userData)
                                 .addOnSuccessListener(aVoid -> {
                                     Toast.makeText(RegistrationActivity.this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegistrationActivity.this, MainClientActivity.class);
+                                    Intent intent = new Intent(RegistrationActivity.this, NavActivity.class);
                                     startActivity(intent);
                                     finish();
                                 })

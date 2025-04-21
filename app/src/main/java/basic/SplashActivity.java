@@ -37,12 +37,10 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-        // Отримуємо посилання на текст реєстрації
         TextView tvRegister = findViewById(R.id.tvRegister);
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Перехід на RegistrationActivity
                 Intent intent = new Intent(SplashActivity.this, RegistrationActivity.class);
                 startActivity(intent);
             }

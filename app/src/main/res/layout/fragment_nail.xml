@@ -1,0 +1,152 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/services"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <TextView
+        android:text="Послуги та ціни"
+        android:textSize="28sp"
+        android:textColor="@color/small_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_marginBottom="24dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/nav_bag"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:text="Манікюр"
+        android:textSize="24sp"
+        android:textColor="@color/logo_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <!-- Service 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Комплекс: зняття + манікюр + покриття"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="600 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Service 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Комплекс японський манікюр"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="600 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Service 3 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Європейський необрізний манікюр"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="250 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="Європейський – підходить для тонкої кутикули та тих, хто надає перевагу більш щадному догляду."
+            android:textSize="14sp"
+            android:textColor="@color/small_text"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -13,17 +13,23 @@
         android:theme="@style/Theme.Coursework"
         tools:targetApi="31">
         <activity
+            android:name="services.HairActivity"
+            android:exported="false" />
+        <activity
+            android:name="client.MainClientActivity"
+            android:exported="true" />
+        <activity
             android:name="admin.AdminActivity"
             android:exported="true" />
         <activity
-            android:name="client.MainClientActivity"
-            android:exported="true"></activity>
+            android:name=".NavActivity"
+            android:exported="true" />
         <activity
             android:name="basic.RegistrationActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="basic.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="basic.SplashActivity"
             android:exported="true">

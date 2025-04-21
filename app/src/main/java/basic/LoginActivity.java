@@ -15,7 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import admin.AdminActivity;
-import client.MainClientActivity;
+import com.example.coursework.NavActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -80,13 +80,13 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "Вхід успішний!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainClientActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, NavActivity.class);
                                 startActivity(intent);
                             }
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Вхід успішний!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainClientActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, NavActivity.class);
                             startActivity(intent);
                             finish();
                         }

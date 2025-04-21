@@ -1,0 +1,252 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/services"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/white">
+
+    <TextView
+        android:text="Послуги та ціни"
+        android:textSize="28sp"
+        android:textColor="@color/small_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_marginBottom="24dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/nav_bag"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Макіяж Section -->
+    <TextView
+        android:text="Макіяж"
+        android:textSize="24sp"
+        android:textColor="@color/logo_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <!-- Експрес Make Up -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Експрес Make Up"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="550 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="Той самий «макіяж без макіяжу». Бездоганний та не дуже помітний тон обличчя, трішки контуру та хайлайтеру, рум'яна для ефекту свіжості, легко підмальовані та вкладені брови, зволожуючий бальзам для губ і нафарбовані вії."
+            android:textSize="14sp"
+            android:textColor="@color/small_text"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Денний Make Up -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Денний Make Up"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="650 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="Коли хочеться природньо, але трішки виразніше. До експрес мейку додаємо макіяж очей у натуральних відтінках, міжвійну стрілку, пропрацювання губ олівцем, почадою чи блиском в натуральних відтінках."
+            android:textSize="14sp"
+            android:textColor="@color/small_text"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Коктейльний Make Up -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Коктейльний Make Up"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="800 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="Коли хочеться більше виразності, без перевантаження. Ідеальний тон, природне сяйво, підкреслені скули та акцент – на вибір: графічні стрілки чи яскраві губи в матовому або глянцевому фініші."
+            android:textSize="14sp"
+            android:textColor="@color/small_text"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Вечірній Make Up -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Вечірній Make Up"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="900 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="Wow-ефект із першого погляду. Ідеальний тон, виразні скули, сяйво хайлайтера та яскраві акценти – драматичний smoky, блискітки, кольорові та темні відтінки тіней, блискітки, пігменти, насичені губи."
+            android:textSize="14sp"
+            android:textColor="@color/small_text"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Fashion Make Up -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_bag"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Fashion Make Up"
+            android:textSize="18sp"
+            android:textColor="@color/small_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:text="950 грн"
+            android:textSize="20sp"
+            android:textColor="@color/logo_text"
+            android:fontFamily="@font/josefinslab_bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:text="Записатися"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,15 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ServicesFragment">
+    android:fillViewport="true">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="40dp"
-        android:gravity="center"
-        android:text="Services" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="16dp">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/josefinslab_bold"
+            android:text="Оберіть категорію"
+            android:textColor="@color/small_text"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/nav_bag"
+            android:layout_marginBottom="24dp"/>
+
+        <LinearLayout
+            android:id="@+id/haircuts_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/service_category_bg"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/hair"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Волосся"
+                android:textSize="25dp"
+                android:textColor="@color/small_text"
+                android:fontFamily="@font/josefinslab_bold"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Стрижки, укладки, покраска"
+                android:textSize="14sp"
+                android:textColor="@color/small_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/makeup_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/service_category_bg"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/makeup"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Макіяж"
+                android:textSize="24sp"
+                android:textColor="@color/small_text"
+                android:fontFamily="@font/josefinslab_bold"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Денний, вечірній, коктейльний макіяж"
+                android:textSize="14sp"
+                android:textColor="@color/small_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/manicure_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/service_category_bg"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/nail"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Манікюр"
+                android:textSize="24sp"
+                android:textColor="@color/small_text"
+                android:fontFamily="@font/josefinslab_bold"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Європейський, японський, комплексний манікюр"
+                android:textSize="14sp"
+                android:textColor="@color/small_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/servicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,4 +1,4 @@
-package client;
+package com.example.coursework;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,14 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.coursework.HomeFragment;
-import com.example.coursework.MastersFragment;
-import com.example.coursework.ProfileFragment;
-import com.example.coursework.R;
-import com.example.coursework.ServicesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainClientActivity extends AppCompatActivity {
+public class NavActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
@@ -30,7 +25,7 @@ public class MainClientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main_client);
+        setContentView(R.layout.activity_nav);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainClient), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
