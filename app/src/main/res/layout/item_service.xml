@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/nav_bag">
+
+    <TextView
+        android:id="@+id/service_name"
+        android:textSize="18sp"
+        android:textColor="@color/small_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/service_price"
+        android:textSize="20sp"
+        android:textColor="@color/logo_text"
+        android:fontFamily="@font/josefinslab_bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/service_description"
+        android:textSize="14sp"
+        android:textColor="@color/small_text"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/book_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Записатися"
+        android:backgroundTint="@color/button"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
+</LinearLayout>
