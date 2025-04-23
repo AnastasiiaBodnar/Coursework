@@ -3,94 +3,34 @@ package models;
 import java.util.List;
 
 public class Master {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private String specialization;
-    private List<Service> services;
-    private String photoUrl;
+    private String id;
+    private String name;
+    private String photoURL;
+    private List<ScheduleItem> schedule;
+    private String specializations;
+    private String userId;
 
-    public Master() {
+    public Master() {}
+
+    public Master(String name, String photoURL, List<ScheduleItem> schedule,
+                  String specializations, String userId) {
+        this.name = name;
+        this.photoURL = photoURL;
+        this.schedule = schedule;
+        this.specializations = specializations;
+        this.userId = userId;
     }
 
-    public Master(int id, String firstName, String lastName, String phone, String specialization, List<Service> services, String photoUrl) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.specialization = specialization;
-        this.services = services;
-        this.photoUrl = photoUrl;
-    }
-
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Master{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", services=" + services +
-                ", photoUrl='" + photoUrl + '\'' +
-                '}';
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getPhotoURL() { return photoURL; }
+    public void setPhotoURL(String photoURL) { this.photoURL = photoURL; }
+    public List<ScheduleItem> getSchedule() { return schedule; }
+    public void setSchedule(List<ScheduleItem> schedule) { this.schedule = schedule; }
+    public String getSpecializations() { return specializations; }
+    public void setSpecializations(String specializations) { this.specializations = specializations; }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 }
