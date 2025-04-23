@@ -9,7 +9,7 @@ public class Appointment {
     private Service service;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private String status; // "scheduled", "completed", "canceled"
+    private String status;
     private String notes;
 
     public Appointment() {

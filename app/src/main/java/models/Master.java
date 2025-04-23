@@ -8,7 +8,7 @@ public class Master {
     private String lastName;
     private String phone;
     private String specialization;
-    private List<Service> services; // Services that this master can perform
+    private List<Service> services;
     private String photoUrl;
 
     public Master() {

@@ -7,7 +7,7 @@ public class User {
     private String phone;
     private String email;
     private String password;
-    private String role; // "client" or "admin"
+    private String role;
 
     public User() {
     }
