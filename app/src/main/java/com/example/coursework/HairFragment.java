@@ -36,22 +36,17 @@ public class HairFragment extends Fragment {
 
     private void loadServices() {
         db.collection("services")
-                .orderBy("category")
+                .whereEqualTo("category", "hair")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         servicesContainer.removeAllViews();
-                        String currentCategory = "";
+
+                        addCategoryHeader("Hair");
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Service service = document.toObject(Service.class);
                             service.setId(document.getId());
-
-                            if (!currentCategory.equals(service.getCategory())) {
-                                currentCategory = service.getCategory();
-                                addCategoryHeader(currentCategory);
-                            }
-
                             addServiceCard(service);
                         }
                     } else {
@@ -112,20 +107,15 @@ public class HairFragment extends Fragment {
     }
 
     private boolean isAdmin() {
-        // Implement your admin check logic here
-        // For example, check Firebase Auth current user's role
         return false;
     }
 
     private void showEditDialog(Service service) {
-        // Create and show edit dialog
     }
 
     private void showDeleteDialog(Service service) {
-        // Create and show delete confirmation dialog
     }
 
     private void bookService(Service service) {
-        // Implement booking logic
     }
 }
