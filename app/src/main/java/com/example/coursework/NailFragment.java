@@ -1,11 +1,9 @@
 package com.example.coursework;
 
 import android.os.Bundle;
-
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import models.Service;
 
 public class NailFragment extends Fragment {
@@ -36,13 +32,12 @@ public class NailFragment extends Fragment {
 
     private void loadServices() {
         db.collection("services")
-                .whereEqualTo("category", "nail")  // Фільтр для категорії "nail"
+                .whereEqualTo("category", "nail")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        servicesContainer.removeAllViews();
+                        servicesContainer.removeAllViews(); // Видаляємо тільки послуги
 
-                        // Додаємо заголовок "Nail" один раз
                         addCategoryHeader("Nail");
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
@@ -67,7 +62,7 @@ public class NailFragment extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(0, 24, 0, 16);
+        params.setMargins(0, 0, 0, 16); // Оновлені відступи
         categoryHeader.setLayoutParams(params);
 
         servicesContainer.addView(categoryHeader);
@@ -95,7 +90,6 @@ public class NailFragment extends Fragment {
         if (isAdmin()) {
             bookButton.setText("Edit");
             bookButton.setOnClickListener(v -> showEditDialog(service));
-
             serviceCard.setOnLongClickListener(v -> {
                 showDeleteDialog(service);
                 return true;

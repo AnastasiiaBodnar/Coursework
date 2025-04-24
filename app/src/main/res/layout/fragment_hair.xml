@@ -18,7 +18,7 @@
             android:fontFamily="@font/nyght_serif"
             android:text="Зробіть запис"
             android:textColor="@color/small_text"
-            android:textSize="28sp" />
+            android:textSize="28dp" />
 
         <View
             android:layout_width="match_parent"

@@ -3,15 +3,13 @@ package models;
 public class Service {
     private String id;
     private String category;
-    private String subcategory; // Додано поле для підкатегорії
+    private String subcategory;
     private String name;
     private String price;
     private String description;
 
-    // Пустий конструктор (обов'язковий для Firestore)
     public Service() {}
 
-    // Конструктор з усіма полями
     public Service(String category, String subcategory, String name, String price, String description) {
         this.category = category;
         this.subcategory = subcategory;
@@ -20,7 +18,6 @@ public class Service {
         this.description = description;
     }
 
-    // Гетери та сетери для всіх полів
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -39,7 +36,6 @@ public class Service {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    // Опціонально: метод toString() для зручності логування
     @Override
     public String toString() {
         return "Service{" +

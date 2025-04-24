@@ -38,7 +38,6 @@ public class HairFragment extends Fragment {
                     if (task.isSuccessful()) {
                         servicesContainer.removeAllViews();
 
-//                        addCategoryHeader("Hair");
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Service service = document.toObject(Service.class);

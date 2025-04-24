@@ -4,39 +4,32 @@
     android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/services"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:background="@color/white">
 
-    <TextView
-        android:text="Послуги та ціни"
-        android:textSize="28sp"
-        android:textColor="@color/small_text"
-        android:fontFamily="@font/josefinslab_bold"
-        android:layout_marginBottom="24dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/nyght_serif"
+            android:text="Зробіть запис"
+            android:textColor="@color/small_text"
+            android:textSize="28dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/nav_bag"
-        android:layout_marginBottom="16dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/nav_bag"
+            android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:text="Макіяж"
-        android:textSize="24sp"
-        android:textColor="@color/logo_text"
-        android:fontFamily="@font/josefinslab_bold"
-        android:layout_marginBottom="16dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
-
-        
-
-
+        <LinearLayout
+            android:id="@+id/services"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>
