@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -14,9 +15,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:layout_marginBottom="24dp"
-            android:fontFamily="@font/josefinslab_bold"
+            android:fontFamily="@font/nyght_serif"
             android:text="Оберіть категорію"
             android:textColor="@color/small_text"
             android:textSize="28sp" />
@@ -52,17 +53,19 @@
                 android:text="Волосся"
                 android:textSize="25dp"
                 android:textColor="@color/small_text"
-                android:fontFamily="@font/josefinslab_bold"
+                android:fontFamily="@font/nyght_serif"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Стрижки, укладки, покраска"
-                android:textSize="14sp"
-                android:textColor="@color/small_text"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/calypso"
+                android:text="Стрижки, укладки, покраска"
+                android:textColor="@color/small_text"
+                android:textSize="16dp"
+                tools:ignore="TextSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +93,7 @@
                 android:text="Макіяж"
                 android:textSize="24sp"
                 android:textColor="@color/small_text"
-                android:fontFamily="@font/josefinslab_bold"
+                android:fontFamily="@font/mak_bold"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
@@ -99,6 +102,7 @@
                 android:text="Денний, вечірній, коктейльний макіяж"
                 android:textSize="14sp"
                 android:textColor="@color/small_text"
+                android:fontFamily="@font/mak_bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
@@ -125,11 +129,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/calypso"
                 android:text="Манікюр"
-                android:textSize="24sp"
                 android:textColor="@color/small_text"
-                android:fontFamily="@font/josefinslab_bold"
-                android:layout_gravity="center_horizontal"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"

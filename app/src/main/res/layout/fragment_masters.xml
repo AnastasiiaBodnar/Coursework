@@ -16,7 +16,7 @@
             android:text="Майстри"
             android:textSize="28sp"
             android:textColor="@color/small_text"
-            android:fontFamily="@font/josefinslab_bold"
+            android:fontFamily="@font/nyght_serif"
             android:layout_marginBottom="24dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>

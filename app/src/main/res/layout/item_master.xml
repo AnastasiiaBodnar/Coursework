@@ -8,25 +8,29 @@
     <ImageView
         android:id="@+id/masterImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="350dp"
         android:scaleType="centerCrop"
         android:background="@color/nav_bag"/>
 
     <TextView
         android:id="@+id/masterName"
+        android:fontFamily="@font/calypso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/masterSpecialization"
+        android:fontFamily="@font/karpaty_font"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:textColor="@color/small_text"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="20dp"/>
+
 
     <TextView
         android:id="@+id/masterSchedule"
