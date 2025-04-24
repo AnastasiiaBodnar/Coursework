@@ -1,11 +1,9 @@
 package com.example.coursework;
 
 import android.os.Bundle;
-
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import models.Service;
 
 public class HairFragment extends Fragment {
@@ -42,7 +38,7 @@ public class HairFragment extends Fragment {
                     if (task.isSuccessful()) {
                         servicesContainer.removeAllViews();
 
-                        addCategoryHeader("Hair");
+//                        addCategoryHeader("Hair");
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Service service = document.toObject(Service.class);
@@ -66,7 +62,7 @@ public class HairFragment extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(0, 24, 0, 16);
+        params.setMargins(0, 0, 0, 16);
         categoryHeader.setLayoutParams(params);
 
         servicesContainer.addView(categoryHeader);
@@ -94,7 +90,6 @@ public class HairFragment extends Fragment {
         if (isAdmin()) {
             bookButton.setText("Edit");
             bookButton.setOnClickListener(v -> showEditDialog(service));
-
             serviceCard.setOnLongClickListener(v -> {
                 showDeleteDialog(service);
                 return true;
@@ -111,11 +106,14 @@ public class HairFragment extends Fragment {
     }
 
     private void showEditDialog(Service service) {
+
     }
 
     private void showDeleteDialog(Service service) {
+
     }
 
     private void bookService(Service service) {
+
     }
 }
