@@ -8,26 +8,26 @@
     <ImageView
         android:id="@+id/masterImage"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="320dp"
         android:scaleType="centerCrop"
         android:background="@color/nav_bag"/>
 
     <TextView
         android:id="@+id/masterName"
-        android:fontFamily="@font/calypso"
+        android:fontFamily="@font/nyght_serif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textColor="@color/small_text"
         android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/masterSpecialization"
-        android:fontFamily="@font/karpaty_font"
+        android:fontFamily="@font/calypso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textColor="@color/small_text"
+        android:textSize="19dp"
+        android:textColor="@color/button"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="20dp"/>
 
@@ -36,7 +36,7 @@
         android:id="@+id/masterSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="15dp"
         android:textColor="@color/small_text"
         android:layout_marginTop="4dp"/>
 </LinearLayout>

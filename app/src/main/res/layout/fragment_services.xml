@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/nyght_serif"
             android:text="Оберіть категорію"
@@ -93,16 +93,16 @@
                 android:text="Макіяж"
                 android:textSize="24sp"
                 android:textColor="@color/small_text"
-                android:fontFamily="@font/mak_bold"
+                android:fontFamily="@font/nyght_serif"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Денний, вечірній, коктейльний макіяж"
-                android:textSize="14sp"
+                android:textSize="16dp"
                 android:textColor="@color/small_text"
-                android:fontFamily="@font/mak_bold"
+                android:fontFamily="@font/calypso"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/calypso"
+                android:fontFamily="@font/nyght_serif"
                 android:text="Манікюр"
                 android:textColor="@color/small_text"
                 android:textSize="24sp" />
@@ -138,11 +138,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Європейський, японський, комплексний манікюр"
-                android:textSize="14sp"
+                android:text="Японський, комплексний манікюр"
+                android:textSize="16dp"
                 android:textColor="@color/small_text"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/calypso"/>
         </LinearLayout>
         <FrameLayout
             android:id="@+id/servicesContainer"
