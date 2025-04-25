@@ -78,8 +78,8 @@ public class NailFragment extends Fragment {
         BookingFragment bookingFragment = new BookingFragment();
 
         Bundle args = new Bundle();
-        args.putString("serviceId", service.getId());
         args.putString("serviceName", service.getName());
+        args.putString("category", service.getCategory());
         bookingFragment.setArguments(args);
 
         getParentFragmentManager()
@@ -88,6 +88,7 @@ public class NailFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
 
 
     private boolean isAdmin() {
