@@ -50,23 +50,6 @@ public class MakeUPFragment extends Fragment {
                 });
     }
 
-    private void addCategoryHeader(String categoryName) {
-        TextView categoryHeader = new TextView(getContext());
-        categoryHeader.setText(categoryName);
-        categoryHeader.setTextSize(24);
-        categoryHeader.setTextColor(ContextCompat.getColor(getContext(), R.color.logo_text));
-        categoryHeader.setTypeface(ResourcesCompat.getFont(getContext(), R.font.josefinslab_bold));
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(0, 0, 0, 16); // Оновлені відступи
-        categoryHeader.setLayoutParams(params);
-
-        servicesContainer.addView(categoryHeader);
-    }
-
     private void addServiceCard(Service service) {
         View serviceCard = LayoutInflater.from(getContext())
                 .inflate(R.layout.item_service, servicesContainer, false);
@@ -86,19 +69,26 @@ public class MakeUPFragment extends Fragment {
             descView.setVisibility(View.GONE);
         }
 
-        if (isAdmin()) {
-            bookButton.setText("Edit");
-            bookButton.setOnClickListener(v -> showEditDialog(service));
-            serviceCard.setOnLongClickListener(v -> {
-                showDeleteDialog(service);
-                return true;
-            });
-        } else {
-            bookButton.setOnClickListener(v -> bookService(service));
-        }
+        bookButton.setOnClickListener(v -> bookService(service));
 
         servicesContainer.addView(serviceCard);
     }
+
+    private void bookService(Service service) {
+        BookingFragment bookingFragment = new BookingFragment();
+
+        Bundle args = new Bundle();
+        args.putString("serviceId", service.getId());
+        args.putString("serviceName", service.getName());
+        bookingFragment.setArguments(args);
+
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, bookingFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
     private boolean isAdmin() {
         return false;
@@ -110,6 +100,4 @@ public class MakeUPFragment extends Fragment {
     private void showDeleteDialog(Service service) {
     }
 
-    private void bookService(Service service) {
-    }
 }
