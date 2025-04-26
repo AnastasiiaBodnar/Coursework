@@ -14,7 +14,7 @@
         android:fontFamily="@font/nyght_serif"
         android:text="Реєстрація:"
         android:textColor="@color/small_text"
-        android:textSize="50dp" />
+        android:textSize="45dp" />
 
     <EditText
         android:id="@+id/etName"
