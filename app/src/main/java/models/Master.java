@@ -7,9 +7,9 @@ public class Master {
     private String name;
     private String photoURL;
     private List<ScheduleItem> schedule;
-    // — Тепер це масив, а не простий рядок:
+
     private List<String> specializations;
-    private String category;  // за потреби
+    private String category;
     private String userId;
 
     public Master() {}
@@ -56,7 +56,6 @@ public class Master {
         this.schedule = schedule;
     }
 
-    // Оновлені геттери/сеттери для масиву:
     public List<String> getSpecializations() {
         return specializations;
     }

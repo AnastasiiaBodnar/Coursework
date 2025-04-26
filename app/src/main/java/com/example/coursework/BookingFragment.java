@@ -68,7 +68,6 @@ public class BookingFragment extends Fragment {
             category = getArguments().getString("category");
         }
 
-        // Инит вьюшек
         tvServiceName = view.findViewById(R.id.tvServiceName);
         mastersContainer = view.findViewById(R.id.mastersContainer);
         timeSlotsContainer = view.findViewById(R.id.timeSlotsContainer);
@@ -149,7 +148,7 @@ public class BookingFragment extends Fragment {
                         removeBusySlotsAndShow(masterId, avail);
                     }
                 })
-                .addOnFailureListener(e -> Log.e(TAG, "Error loading master schedule", e));
+                .addOnFailureListener(e -> Log.e(TAG, "Помилка завантаження розкладу майстра", e));
     }
 
     private List<String> getAvailableSlotsForSelectedDay(List<ScheduleItem> schedule, Calendar date) {
