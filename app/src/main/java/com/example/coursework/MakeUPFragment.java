@@ -36,8 +36,7 @@ public class MakeUPFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        servicesContainer.removeAllViews(); // Тепер видаляємо тільки послуги
-
+                        servicesContainer.removeAllViews();
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Service service = document.toObject(Service.class);
@@ -45,7 +44,7 @@ public class MakeUPFragment extends Fragment {
                             addServiceCard(service);
                         }
                     } else {
-                        Log.w("MakeUPFragment", "Error getting documents.", task.getException());
+                        Log.w("MakeUPFragment", "Помилка", task.getException());
                     }
                 });
     }

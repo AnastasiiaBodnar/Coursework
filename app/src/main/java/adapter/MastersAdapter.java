@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,19 +39,30 @@ public class MastersAdapter extends RecyclerView.Adapter<MastersAdapter.MasterVi
     public void onBindViewHolder(@NonNull MasterViewHolder holder, int position) {
         Master master = mastersList.get(position);
         holder.nameTextView.setText(master.getName() != null ? master.getName() : "");
-        holder.specializationTextView.setText(master.getSpecializations() != null ? master.getSpecializations() : "");
+
+        List<String> specs = master.getSpecializations();
+        if (specs != null && !specs.isEmpty()) {
+            holder.specializationTextView.setText(TextUtils.join(", ", specs));
+        } else {
+            holder.specializationTextView.setText("");
+        }
 
         if (master.getSchedule() != null && !master.getSchedule().isEmpty()) {
             StringBuilder scheduleBuilder = new StringBuilder();
             for (ScheduleItem item : master.getSchedule()) {
                 scheduleBuilder.append(item.getDay())
-                        .append(": ")
-                        .append(item.getStart())
-                        .append("-")
-                        .append(item.getEnd())
-                        .append("\n");
+                        .append(": ");
+
+                List<String> slots = item.getSlots();
+                if (slots != null && !slots.isEmpty()) {
+                    scheduleBuilder.append(TextUtils.join(", ", slots));
+                } else {
+                    scheduleBuilder.append("вихідний");
+                }
+
+                scheduleBuilder.append("\n");
             }
-            holder.scheduleTextView.setText(scheduleBuilder.toString());
+            holder.scheduleTextView.setText(scheduleBuilder.toString().trim());
         } else {
             holder.scheduleTextView.setText("Розклад не вказано");
         }
@@ -77,12 +89,12 @@ public class MastersAdapter extends RecyclerView.Adapter<MastersAdapter.MasterVi
         TextView specializationTextView;
         TextView scheduleTextView;
 
-        public MasterViewHolder(@NonNull View itemView) {
+        MasterViewHolder(@NonNull View itemView) {
             super(itemView);
             masterImageView = itemView.findViewById(R.id.masterImage);
             nameTextView = itemView.findViewById(R.id.masterName);
             specializationTextView = itemView.findViewById(R.id.masterSpecialization);
-            scheduleTextView = itemView.findViewById(R.id.masterSchedule); // Ініціалізуємо
+            scheduleTextView = itemView.findViewById(R.id.masterSchedule);
         }
     }
 }

@@ -43,7 +43,7 @@ public class HairFragment extends Fragment {
                             addServiceCard(service);
                         }
                     } else {
-                        Log.w("HairFragment", "Error getting documents.", task.getException());
+                        Log.w("HairFragment", "Помилка", task.getException());
                     }
                 });
     }

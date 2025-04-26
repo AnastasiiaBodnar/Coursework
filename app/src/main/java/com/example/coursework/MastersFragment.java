@@ -49,7 +49,6 @@ public class MastersFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
 
-        // Set clip settings
         viewPager.setClipToPadding(false);
         viewPager.setClipChildren(false);
         viewPager.setOffscreenPageLimit(3);
@@ -88,7 +87,7 @@ public class MastersFragment extends Fragment {
                                 master.setId(document.getId());
                                 mastersList.add(master);
                             } catch (Exception e) {
-                                Log.e("Firestore", "Помилка парсингу документа " + document.getId(), e);
+                                Log.e("Firestore", "Помилка документа " + document.getId(), e);
                                 Log.e("Firestore", "Дані документа: " + document.getData());
                             }
                         }
