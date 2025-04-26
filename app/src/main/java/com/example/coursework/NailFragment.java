@@ -76,18 +76,17 @@ public class NailFragment extends Fragment {
 
     private void bookService(Service service) {
         BookingFragment bookingFragment = new BookingFragment();
-
         Bundle args = new Bundle();
         args.putString("serviceName", service.getName());
-        args.putString("category", service.getCategory());
+        args.putString("category",    service.getCategory());
         bookingFragment.setArguments(args);
-
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frameLayout, bookingFragment)
                 .addToBackStack(null)
                 .commit();
     }
+
 
 
 
