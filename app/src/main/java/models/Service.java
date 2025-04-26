@@ -26,25 +26,11 @@ public class Service {
 
     public String getSubcategory() { return subcategory; }
     public void setSubcategory(String subcategory) { this.subcategory = subcategory; }
-
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
     public String getPrice() { return price; }
     public void setPrice(String price) { this.price = price; }
-
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    @Override
-    public String toString() {
-        return "Service{" +
-                "id='" + id + '\'' +
-                ", category='" + category + '\'' +
-                ", subcategory='" + subcategory + '\'' +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

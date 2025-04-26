@@ -40,12 +40,6 @@ public class MastersAdapter extends RecyclerView.Adapter<MastersAdapter.MasterVi
         Master master = mastersList.get(position);
         holder.nameTextView.setText(master.getName() != null ? master.getName() : "");
 
-        List<String> specs = master.getSpecializations();
-        if (specs != null && !specs.isEmpty()) {
-            holder.specializationTextView.setText(TextUtils.join(", ", specs));
-        } else {
-            holder.specializationTextView.setText("");
-        }
 
         if (master.getSchedule() != null && !master.getSchedule().isEmpty()) {
             StringBuilder scheduleBuilder = new StringBuilder();
