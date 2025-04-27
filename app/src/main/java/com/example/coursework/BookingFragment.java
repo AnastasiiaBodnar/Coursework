@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.Timestamp;
@@ -36,7 +38,6 @@ import models.Master;
 import models.ScheduleItem;
 
 public class BookingFragment extends Fragment {
-
     private static final String TAG = "BookingFragment";
 
     private String serviceName;
@@ -54,6 +55,9 @@ public class BookingFragment extends Fragment {
     private CalendarView calendarView;
     private Calendar selectedDate;
 
+    private Button selectedMasterButton = null;
+    private Button selectedTimeButton   = null;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
@@ -65,14 +69,14 @@ public class BookingFragment extends Fragment {
 
         if (getArguments() != null) {
             serviceName = getArguments().getString("serviceName");
-            category = getArguments().getString("category");
+            category    = getArguments().getString("category");
         }
 
-        tvServiceName = view.findViewById(R.id.tvServiceName);
-        mastersContainer = view.findViewById(R.id.mastersContainer);
-        timeSlotsContainer = view.findViewById(R.id.timeSlotsContainer);
-        btnConfirm = view.findViewById(R.id.btnConfirm);
-        calendarView = view.findViewById(R.id.calendarView);
+        tvServiceName     = view.findViewById(R.id.tvServiceName);
+        mastersContainer  = view.findViewById(R.id.mastersContainer);
+        timeSlotsContainer= view.findViewById(R.id.timeSlotsContainer);
+        btnConfirm        = view.findViewById(R.id.btnConfirm);
+        calendarView      = view.findViewById(R.id.calendarView);
 
         tvServiceName.setText("Запис на: " + serviceName);
 
@@ -80,11 +84,9 @@ public class BookingFragment extends Fragment {
         selectedDate.add(Calendar.DAY_OF_MONTH, 1);
         calendarView.setDate(selectedDate.getTimeInMillis());
 
-        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-            selectedDate.set(year, month, dayOfMonth);
-            timeSlotsContainer.removeAllViews();
-            selectedTimestamp = null;
-            btnConfirm.setEnabled(false);
+        calendarView.setOnDateChangeListener((cv, year, month, day) -> {
+            selectedDate.set(year, month, day);
+            clearTimeSelection();
             if (selectedMasterId != null) {
                 loadTimeSlotsForMaster(selectedMasterId);
             }
@@ -98,29 +100,28 @@ public class BookingFragment extends Fragment {
     }
 
     private void loadMastersByCategory() {
-        Log.d(TAG, "loadMastersByCategory() category=" + category);
         mastersContainer.removeAllViews();
-
         db.collection("masters")
                 .whereEqualTo("category", category)
                 .get()
                 .addOnSuccessListener((QuerySnapshot query) -> {
-                    Log.d(TAG, "Masters query returned: " + query.size());
-                    if (query.isEmpty()) {
-                        Toast.makeText(getContext(), "Немає майстрів для " + category, Toast.LENGTH_SHORT).show();
-                        return;
-                    }
                     for (QueryDocumentSnapshot doc : query) {
                         Master master = doc.toObject(Master.class);
                         master.setId(doc.getId());
 
                         Button btn = new Button(getContext());
+                        styleDefault(btn);
+
                         btn.setText(master.getName());
                         btn.setOnClickListener(v -> {
+                            if (selectedMasterButton != null) {
+                                styleDefault(selectedMasterButton);
+                            }
+                            selectedMasterButton = btn;
+                            styleSelected(btn);
+
                             selectedMasterId = master.getId();
-                            timeSlotsContainer.removeAllViews();
-                            selectedTimestamp = null;
-                            btnConfirm.setEnabled(false);
+                            clearTimeSelection();
                             loadTimeSlotsForMaster(master.getId());
                         });
 
@@ -129,31 +130,33 @@ public class BookingFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error loading masters", e);
-                    Toast.makeText(getContext(), "Помилка при завантаженні майстрів", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),
+                            "Помилка при завантаженні майстрів",
+                            Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void loadTimeSlotsForMaster(String masterId) {
-        Log.d(TAG, "loadTimeSlotsForMaster() id=" + masterId);
         timeSlotsContainer.removeAllViews();
-
-        db.collection("masters").document(masterId).get()
+        db.collection("masters").document(masterId)
+                .get()
                 .addOnSuccessListener(doc -> {
                     Master master = doc.toObject(Master.class);
-                    if (master == null) return;
-                    List<ScheduleItem> schedule = master.getSchedule();
-                    if (schedule != null) {
-                        List<String> avail = getAvailableSlotsForSelectedDay(schedule, selectedDate);
-                        Log.d(TAG, "Available slots count=" + avail.size());
-                        removeBusySlotsAndShow(masterId, avail);
-                    }
+                    if (master == null || master.getSchedule() == null) return;
+                    List<String> avail = getAvailableSlotsForSelectedDay(
+                            master.getSchedule(), selectedDate
+                    );
+                    removeBusySlotsAndShow(avail);
                 })
-                .addOnFailureListener(e -> Log.e(TAG, "Помилка завантаження розкладу майстра", e));
+                .addOnFailureListener(e -> Log.e(TAG, "Error loading schedule", e));
     }
 
-    private List<String> getAvailableSlotsForSelectedDay(List<ScheduleItem> schedule, Calendar date) {
+    private List<String> getAvailableSlotsForSelectedDay(
+            List<ScheduleItem> schedule, Calendar date
+    ) {
         List<String> result = new ArrayList<>();
-        String dayName = new SimpleDateFormat("EEEE", new Locale("uk")).format(date.getTime()).toLowerCase();
+        String dayName = new SimpleDateFormat("EEEE", new Locale("uk"))
+                .format(date.getTime()).toLowerCase();
         for (ScheduleItem ds : schedule) {
             if (ds.getDay().equalsIgnoreCase(dayName)) {
                 for (String slot : ds.getSlots()) {
@@ -167,24 +170,32 @@ public class BookingFragment extends Fragment {
         return result;
     }
 
-    private void removeBusySlotsAndShow(String masterId, List<String> slots) {
+    private void removeBusySlotsAndShow(List<String> slots) {
         db.collection("bookings")
-                .whereEqualTo("masterId", masterId)
+                .whereEqualTo("masterId", selectedMasterId)
                 .get()
                 .addOnSuccessListener(query -> {
                     Set<String> busy = new HashSet<>();
                     for (DocumentSnapshot d : query) {
                         Timestamp ts = d.getTimestamp("timestamp");
                         if (ts != null && isSameDay(ts.toDate(), selectedDate.getTime())) {
-                            String t = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(ts.toDate());
-                            busy.add(t);
+                            busy.add(new SimpleDateFormat("HH:mm", Locale.getDefault())
+                                    .format(ts.toDate()));
                         }
                     }
                     for (String slot : slots) {
                         if (!busy.contains(slot)) {
                             Button btn = new Button(getContext());
+                            styleDefault(btn);
                             btn.setText(slot);
                             btn.setOnClickListener(v -> {
+
+                                if (selectedTimeButton != null) {
+                                    styleDefault(selectedTimeButton);
+                                }
+                                selectedTimeButton = btn;
+                                styleSelected(btn);
+
                                 selectedTimestamp = buildTimestamp(selectedDate, slot);
                                 btnConfirm.setEnabled(true);
                             });
@@ -193,6 +204,57 @@ public class BookingFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "Error loading busy slots", e));
+    }
+
+    private void confirmBooking() {
+        if (selectedTimestamp == null || selectedMasterId == null) {
+            Toast.makeText(getContext(),
+                    "Оберіть майстра й годину",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Map<String, Object> booking = new HashMap<>();
+        booking.put("userId", auth.getCurrentUser().getUid());
+        booking.put("serviceName", serviceName);
+        booking.put("category", category);
+        booking.put("masterId", selectedMasterId);
+        booking.put("timestamp", selectedTimestamp);
+        booking.put("status", "підтверджено");
+
+        db.collection("bookings")
+                .add(booking)
+                .addOnSuccessListener(doc -> {
+                    Toast.makeText(getContext(),
+                            "Запис підтверджено!",
+                            Toast.LENGTH_SHORT).show();
+                    getParentFragmentManager().popBackStack();
+                })
+                .addOnFailureListener(e -> Toast.makeText(getContext(),
+                        "Помилка: " + e.getMessage(),
+                        Toast.LENGTH_SHORT).show());
+    }
+
+    private void styleDefault(Button btn) {
+        btn.setBackgroundResource(R.drawable.rounded_button);
+        btn.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        btn.setTypeface(ResourcesCompat.getFont(getContext(), R.font.nyght_serif));
+        btn.setAllCaps(false);
+    }
+
+    private void styleSelected(Button btn) {
+        btn.setBackgroundResource(R.drawable.rounded_button_selected);
+        btn.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        btn.setTypeface(ResourcesCompat.getFont(getContext(), R.font.nyght_serif));
+        btn.setAllCaps(false);
+    }
+
+    private void clearTimeSelection() {
+        if (selectedTimeButton != null) {
+            styleDefault(selectedTimeButton);
+            selectedTimeButton = null;
+        }
+        btnConfirm.setEnabled(false);
+        selectedTimestamp = null;
     }
 
     private boolean isSameDay(Date d1, Date d2) {
@@ -220,28 +282,5 @@ public class BookingFragment extends Fragment {
         c.set(Calendar.MINUTE, Integer.parseInt(p[1]));
         c.set(Calendar.SECOND, 0);
         return new Timestamp(c.getTime());
-    }
-
-    private void confirmBooking() {
-        if (selectedTimestamp == null || selectedMasterId == null) {
-            Toast.makeText(getContext(), "Оберіть майстра й годину", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Map<String, Object> booking = new HashMap<>();
-        booking.put("userId", auth.getCurrentUser().getUid());
-        booking.put("serviceName", serviceName);
-        booking.put("category", category);
-        booking.put("masterId", selectedMasterId);
-        booking.put("timestamp", selectedTimestamp);
-        booking.put("status", "підтверджено");
-
-        db.collection("bookings")
-                .add(booking)
-                .addOnSuccessListener(doc -> {
-                    Toast.makeText(getContext(), "Запис підтверджено!", Toast.LENGTH_SHORT).show();
-                    getParentFragmentManager().popBackStack();
-                })
-                .addOnFailureListener(e -> Toast.makeText(getContext(),
-                        "Помилка: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
