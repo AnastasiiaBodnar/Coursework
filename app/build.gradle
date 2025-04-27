@@ -54,4 +54,12 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-firestore:24.7.0'
+    implementation 'com.google.firebase:firebase-storage:20.2.0'
+    implementation 'com.google.firebase:firebase-auth:22.1.1'
+
+    // ViewPager2 + DotsIndicator
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
 }

@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:padding="16dp"
     android:background="@color/white">
 
     <TextView
@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/profileName"
-        android:textSize="30sp"
-        android:layout_marginTop="40dp"
+        android:textSize="30dp"
+        android:layout_marginTop="1dp"
         android:textStyle="bold"
         android:textColor="@color/logo_text"
         android:fontFamily="@font/nyght_serif"
@@ -34,10 +34,10 @@
 
     <TextView
         android:id="@+id/profilePhone"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/small_text"
-        android:fontFamily="@font/calypso"
+        android:textColor="@color/button"
+        android:fontFamily="@font/nyght_serif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+380000000000" />
