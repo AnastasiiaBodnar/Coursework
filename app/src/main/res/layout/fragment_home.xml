@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- 1. Привітання -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,27 +23,38 @@
             android:textColor="@color/small_text"
             android:textSize="28sp" />
 
-        <!-- Роздільна лінія -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/nav_bag" />
 
-        <!-- 2. Карусель робіт -->
+
+        <TextView
+            android:textSize="30dp"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
+            android:textColor="@color/button"
+            android:fontFamily="@font/calypso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Наші роботи:" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/homeCarousel"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="400dp" />
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/homeDots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            app:dotsColor="@color/button"
+            app:selectedDotColor="@color/small_text"
             android:layout_marginTop="8dp" />
 
-        <!-- 3. Адреса салону -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,20 +65,28 @@
                 android:id="@+id/tvAddressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/calypso"
                 android:text="Наше розташування:"
-                android:textSize="20sp"
+                android:textSize="30dp"
+                android:textColor="@color/button"
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvAddressMisto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="м. Хмельницький"
+                android:textColor="@color/logo_text" />
 
             <TextView
                 android:id="@+id/tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="вул. Шевченка, 24"
-                android:textSize="18sp" />
+                android:text="вул. Зарічаська, 10/4"
+                android:textColor="@color/logo_text"/>
         </LinearLayout>
 
-        <!-- 4. Контакти та соцмережі -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,20 +97,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Контакти"
-                android:textSize="20sp"
                 android:textStyle="bold"
+                android:textSize="30dp"
+                android:fontFamily="@font/calypso"
+                android:textColor="@color/button"
                 android:layout_marginBottom="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="📞 +380 12 345 6789"
+                android:textColor="@color/logo_text"
                 android:layout_marginBottom="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="✉️ eclat@gmail.com"
+                android:textColor="@color/logo_text"
                 android:layout_marginBottom="12dp" />
 
             <LinearLayout

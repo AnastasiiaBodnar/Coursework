@@ -10,6 +10,7 @@
     <color name="nav_bag">#EBEBEB</color>
     <color name="logo_text">#BC9A76</color>
     <color name="small_text">#624A2D</color>
+    <color name="text">#786554</color>
     <color name="button">#B08A6F</color>
     <color name="bag">#41B08A6F</color>
 </resources>

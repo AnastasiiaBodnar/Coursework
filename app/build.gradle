@@ -58,8 +58,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.2.0'
     implementation 'com.google.firebase:firebase-auth:22.1.1'
 
-    // ViewPager2 + DotsIndicator
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation 'com.tbuonomo:dotsindicator:4.2'
-
+    implementation 'com.prolificinteractive:material-calendarview:2.0.0'
 }
