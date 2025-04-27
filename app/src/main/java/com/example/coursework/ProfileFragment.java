@@ -17,6 +17,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ProfileFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         bookingList = new ArrayList<>();
-        adapter = new BookingAdapter(bookingList);
+        adapter = new BookingAdapter(getContext(), bookingList);
 
         bookingsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         bookingsRecyclerView.setAdapter(adapter);
@@ -65,28 +66,26 @@ public class ProfileFragment extends Fragment {
     private void loadUserProfile() {
         String userId = auth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String firstName = document.getString("firstName");
-                            String lastName  = document.getString("lastName");
-                            String phone     = document.getString("phone");
-                            profileName.setText(firstName + " " + lastName);
-                            profilePhone.setText(phone);
-                        } else {
-                            Toast.makeText(getContext(),
-                                    "Дані користувача не знайдено.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        String firstName = doc.getString("firstName");
+                        String lastName  = doc.getString("lastName");
+                        String phone     = doc.getString("phone");
+                        profileName.setText((firstName != null ? firstName : "") + " "
+                                + (lastName  != null ? lastName  : ""));
+                        profilePhone.setText(phone != null ? phone : "");
                     } else {
-                        Log.e("ProfileFragment",
-                                "Помилка отримання даних",
-                                task.getException());
                         Toast.makeText(getContext(),
-                                "Помилка завантаження профілю",
+                                "Дані користувача не знайдено.",
                                 Toast.LENGTH_SHORT).show();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("ProfileFragment",
+                            "Помилка отримання даних користувача", e);
+                    Toast.makeText(getContext(),
+                            "Помилка завантаження профілю",
+                            Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -96,11 +95,13 @@ public class ProfileFragment extends Fragment {
         db.collection("bookings")
                 .whereEqualTo("userId", userId)
                 .get()
-                .addOnSuccessListener(querySnapshot -> {
+                .addOnSuccessListener((QuerySnapshot query) -> {
                     bookingList.clear();
                     adapter.notifyDataSetChanged();
 
-                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                    for (DocumentSnapshot doc : query.getDocuments()) {
+                        String bookingId = doc.getId();
+
                         Timestamp ts = doc.getTimestamp("timestamp");
                         if (ts == null) continue;
                         Date dateObj = ts.toDate();
@@ -114,14 +115,14 @@ public class ProfileFragment extends Fragment {
                         String masterId    = doc.getString("masterId");
                         if (masterId == null) masterId = "";
 
-                        db.collection("masters")
-                                .document(masterId)
+                        db.collection("masters").document(masterId)
                                 .get()
                                 .addOnSuccessListener(masterDoc -> {
                                     String masterName = masterDoc.getString("name");
                                     if (masterName == null) masterName = "";
 
                                     Booking booking = new Booking(
+                                            bookingId,
                                             serviceName != null ? serviceName : "",
                                             date,
                                             time,
@@ -133,12 +134,13 @@ public class ProfileFragment extends Fragment {
                                 })
                                 .addOnFailureListener(e -> {
                                     Log.e("ProfileFragment",
-                                            "Помилка завантаження майстра",
-                                            e);
+                                            "Помилка завантаження майстра", e);
                                 });
                     }
                 })
                 .addOnFailureListener(e -> {
+                    Log.e("ProfileFragment",
+                            "Не вдалося завантажити записи", e);
                     Toast.makeText(getContext(),
                             "Не вдалося завантажити записи",
                             Toast.LENGTH_SHORT).show();

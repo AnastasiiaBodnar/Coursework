@@ -1,6 +1,7 @@
 package models;
 
 public class Booking {
+    private String id;
     private String serviceName;
     private String date;
     private String time;
@@ -9,13 +10,17 @@ public class Booking {
 
     public Booking() {}
 
-    public Booking(String serviceName, String date, String time, String masterName, String status) {
+    public Booking(String id, String serviceName, String date, String time, String masterName, String status) {
+        this.id = id;
         this.serviceName = serviceName;
         this.date = date;
         this.time = time;
         this.masterName = masterName;
         this.status = status;
     }
+
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getServiceName() { return serviceName; }
     public String getDate() { return date; }
