@@ -8,16 +8,17 @@
     <ImageView
         android:id="@+id/masterImage"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="480dp"
+        android:background="@color/nav_bag"
         android:scaleType="centerCrop"
-        android:background="@color/nav_bag"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:id="@+id/masterName"
         android:fontFamily="@font/nyght_serif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="32dp"
         android:textColor="@color/small_text"
         android:layout_marginTop="8dp"/>
 
@@ -26,10 +27,10 @@
         android:fontFamily="@font/calypso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="19dp"
+        android:textSize="27dp"
         android:textColor="@color/button"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="30dp"/>
 
 
     <TextView

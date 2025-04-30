@@ -39,6 +39,9 @@ public class MastersAdapter extends RecyclerView.Adapter<MastersAdapter.MasterVi
     public void onBindViewHolder(@NonNull MasterViewHolder holder, int position) {
         Master master = mastersList.get(position);
         holder.nameTextView.setText(master.getName() != null ? master.getName() : "");
+        holder.specializationTextView.setText(master.getSpecialization() != null
+                ? master.getSpecialization()
+                : "Без спеціалізації");
 
 
         if (master.getSchedule() != null && !master.getSchedule().isEmpty()) {

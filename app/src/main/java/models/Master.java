@@ -9,14 +9,17 @@ public class Master {
     private List<ScheduleItem> schedule;
     private String category;
     private String userId;
+    private String specialization;
+
 
     public Master() {}
 
-    public Master(String name, String photoURL, List<ScheduleItem> schedule, String category, String userId) {
+    public Master(String name, String photoURL, List<ScheduleItem> schedule, String category, String specialization, String userId) {
         this.name = name;
         this.photoURL = photoURL;
         this.schedule = schedule;
         this.category = category;
+        this.specialization = specialization;
         this.userId = userId;
     }
 
@@ -35,4 +38,7 @@ public class Master {
     public void setCategory(String category) { this.category = category; }
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
+    public String getSpecialization() { return specialization; }
+    public void setSpecialization(String specialization) { this.specialization = specialization; }
+
 }
