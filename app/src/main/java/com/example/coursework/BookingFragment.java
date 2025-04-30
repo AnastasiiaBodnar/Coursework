@@ -20,19 +20,10 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import models.Master;
 import models.ScheduleItem;
@@ -82,15 +73,38 @@ public class BookingFragment extends Fragment {
 
         selectedDate = Calendar.getInstance();
         selectedDate.add(Calendar.DAY_OF_MONTH, 1);
+
+        Calendar minDate = Calendar.getInstance();
+        minDate.add(Calendar.DAY_OF_MONTH, 1);
+        calendarView.setMinDate(minDate.getTimeInMillis());
+
         calendarView.setDate(selectedDate.getTimeInMillis());
 
-        calendarView.setOnDateChangeListener((cv, year, month, day) -> {
-            selectedDate.set(year, month, day);
+        calendarView.setOnDateChangeListener((cv, year, month, dayOfMonth) -> {
+            Calendar chosenDate = Calendar.getInstance();
+            chosenDate.set(year, month, dayOfMonth, 0, 0, 0);
+            chosenDate.set(Calendar.MILLISECOND, 0);
+
             clearTimeSelection();
+
+            String dayName = new SimpleDateFormat("EEEE", new Locale("uk")).format(chosenDate.getTime()).toLowerCase();
+
+            if (dayName.equals("неділя")) {
+                Toast.makeText(getContext(), "Неділя — вихідний день. Вибрано найближчий робочий день.", Toast.LENGTH_SHORT).show();
+
+                chosenDate.add(Calendar.DAY_OF_MONTH, 1);
+                calendarView.setDate(chosenDate.getTimeInMillis());
+
+                dayName = new SimpleDateFormat("EEEE", new Locale("uk")).format(chosenDate.getTime()).toLowerCase();
+            }
+
+            selectedDate.setTime(chosenDate.getTime());
+
             if (selectedMasterId != null) {
                 loadTimeSlotsForMaster(selectedMasterId);
             }
         });
+
 
         btnConfirm.setOnClickListener(v -> confirmBooking());
 
@@ -105,8 +119,9 @@ public class BookingFragment extends Fragment {
                 .whereEqualTo("category", category)
                 .get()
                 .addOnSuccessListener((QuerySnapshot query) -> {
-                    for (QueryDocumentSnapshot doc : query) {
+                    for (DocumentSnapshot doc : query) {
                         Master master = doc.toObject(Master.class);
+                        if (master == null) continue;
                         master.setId(doc.getId());
 
                         Button btn = new Button(getContext());
@@ -114,9 +129,7 @@ public class BookingFragment extends Fragment {
 
                         btn.setText(master.getName());
                         btn.setOnClickListener(v -> {
-                            if (selectedMasterButton != null) {
-                                styleDefault(selectedMasterButton);
-                            }
+                            if (selectedMasterButton != null) styleDefault(selectedMasterButton);
                             selectedMasterButton = btn;
                             styleSelected(btn);
 
@@ -130,9 +143,7 @@ public class BookingFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error loading masters", e);
-                    Toast.makeText(getContext(),
-                            "Помилка при завантаженні майстрів",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Помилка при завантаженні майстрів", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -143,22 +154,21 @@ public class BookingFragment extends Fragment {
                 .addOnSuccessListener(doc -> {
                     Master master = doc.toObject(Master.class);
                     if (master == null || master.getSchedule() == null) return;
-                    List<String> avail = getAvailableSlotsForSelectedDay(
-                            master.getSchedule(), selectedDate
-                    );
+                    List<String> avail = getAvailableSlotsForSelectedDay(master.getSchedule(), selectedDate);
                     removeBusySlotsAndShow(avail);
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "Error loading schedule", e));
     }
 
-    private List<String> getAvailableSlotsForSelectedDay(
-            List<ScheduleItem> schedule, Calendar date
-    ) {
+    private String normalize(String input) {
+        return input.replace("ʼ", "'").replace("’", "'").toLowerCase();
+    }
+
+    private List<String> getAvailableSlotsForSelectedDay(List<ScheduleItem> schedule, Calendar date) {
         List<String> result = new ArrayList<>();
-        String dayName = new SimpleDateFormat("EEEE", new Locale("uk"))
-                .format(date.getTime()).toLowerCase();
+        String dayName = new SimpleDateFormat("EEEE", new Locale("uk")).format(date.getTime()).toLowerCase();
         for (ScheduleItem ds : schedule) {
-            if (ds.getDay().equalsIgnoreCase(dayName)) {
+            if (normalize(ds.getDay()).equalsIgnoreCase(normalize(dayName))) {
                 for (String slot : ds.getSlots()) {
                     if (isFutureSlot(date, slot)) {
                         result.add(slot);
@@ -171,6 +181,11 @@ public class BookingFragment extends Fragment {
     }
 
     private void removeBusySlotsAndShow(List<String> slots) {
+        selectedTimestamp = null;
+        btnConfirm.setEnabled(false);
+        selectedTimeButton = null;
+        timeSlotsContainer.removeAllViews();
+
         db.collection("bookings")
                 .whereEqualTo("masterId", selectedMasterId)
                 .get()
@@ -179,28 +194,30 @@ public class BookingFragment extends Fragment {
                     for (DocumentSnapshot d : query) {
                         Timestamp ts = d.getTimestamp("timestamp");
                         if (ts != null && isSameDay(ts.toDate(), selectedDate.getTime())) {
-                            busy.add(new SimpleDateFormat("HH:mm", Locale.getDefault())
-                                    .format(ts.toDate()));
+                            busy.add(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(ts.toDate()));
                         }
                     }
+
+                    boolean hasFreeSlot = false;
                     for (String slot : slots) {
                         if (!busy.contains(slot)) {
+                            hasFreeSlot = true;
                             Button btn = new Button(getContext());
                             styleDefault(btn);
                             btn.setText(slot);
                             btn.setOnClickListener(v -> {
-
-                                if (selectedTimeButton != null) {
-                                    styleDefault(selectedTimeButton);
-                                }
+                                if (selectedTimeButton != null) styleDefault(selectedTimeButton);
                                 selectedTimeButton = btn;
                                 styleSelected(btn);
-
                                 selectedTimestamp = buildTimestamp(selectedDate, slot);
                                 btnConfirm.setEnabled(true);
                             });
                             timeSlotsContainer.addView(btn);
                         }
+                    }
+
+                    if (!hasFreeSlot) {
+                        Toast.makeText(getContext(), "Вихідний або всі години зайняті!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "Error loading busy slots", e));
@@ -208,11 +225,10 @@ public class BookingFragment extends Fragment {
 
     private void confirmBooking() {
         if (selectedTimestamp == null || selectedMasterId == null) {
-            Toast.makeText(getContext(),
-                    "Оберіть майстра й годину",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Оберіть майстра й годину", Toast.LENGTH_SHORT).show();
             return;
         }
+
         Map<String, Object> booking = new HashMap<>();
         booking.put("userId", auth.getCurrentUser().getUid());
         booking.put("serviceName", serviceName);
@@ -224,14 +240,10 @@ public class BookingFragment extends Fragment {
         db.collection("bookings")
                 .add(booking)
                 .addOnSuccessListener(doc -> {
-                    Toast.makeText(getContext(),
-                            "Запис підтверджено!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Запис підтверджено!", Toast.LENGTH_SHORT).show();
                     getParentFragmentManager().popBackStack();
                 })
-                .addOnFailureListener(e -> Toast.makeText(getContext(),
-                        "Помилка: " + e.getMessage(),
-                        Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Помилка: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private void styleDefault(Button btn) {
@@ -249,10 +261,8 @@ public class BookingFragment extends Fragment {
     }
 
     private void clearTimeSelection() {
-        if (selectedTimeButton != null) {
-            styleDefault(selectedTimeButton);
-            selectedTimeButton = null;
-        }
+        if (selectedTimeButton != null) styleDefault(selectedTimeButton);
+        selectedTimeButton = null;
         btnConfirm.setEnabled(false);
         selectedTimestamp = null;
     }
@@ -262,8 +272,8 @@ public class BookingFragment extends Fragment {
         Calendar c2 = Calendar.getInstance();
         c1.setTime(d1);
         c2.setTime(d2);
-        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
-                && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
+        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR) &&
+                c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
     }
 
     private boolean isFutureSlot(Calendar date, String slot) {
