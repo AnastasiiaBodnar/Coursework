@@ -42,6 +42,28 @@
         android:layout_height="wrap_content"
         android:text="+380000000000" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btnUpcoming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Майбутні" />
+
+        <Button
+            android:id="@+id/btnPast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Минулі"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookingsRecyclerView"
         android:layout_width="match_parent"

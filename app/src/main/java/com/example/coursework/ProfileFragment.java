@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class ProfileFragment extends Fragment {
     private RecyclerView bookingsRecyclerView;
     private BookingAdapter adapter;
     private List<Booking> bookingList;
+    private Button btnUpcoming, btnPast;
+    private boolean showUpcoming = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,6 +50,8 @@ public class ProfileFragment extends Fragment {
         profileName = view.findViewById(R.id.profileName);
         profilePhone = view.findViewById(R.id.profilePhone);
         bookingsRecyclerView = view.findViewById(R.id.bookingsRecyclerView);
+        btnUpcoming = view.findViewById(R.id.btnUpcoming);
+        btnPast = view.findViewById(R.id.btnPast);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -57,11 +62,23 @@ public class ProfileFragment extends Fragment {
         bookingsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         bookingsRecyclerView.setAdapter(adapter);
 
+        btnUpcoming.setOnClickListener(v -> {
+            showUpcoming = true;
+            loadUserBookings();
+        });
+
+        btnPast.setOnClickListener(v -> {
+            showUpcoming = false;
+            loadUserBookings();
+        });
+
         loadUserProfile();
         loadUserBookings();
 
         return view;
     }
+
+
 
     private void loadUserProfile() {
         String userId = auth.getCurrentUser().getUid();
@@ -100,50 +117,40 @@ public class ProfileFragment extends Fragment {
                     adapter.notifyDataSetChanged();
 
                     for (DocumentSnapshot doc : query.getDocuments()) {
-                        String bookingId = doc.getId();
-
                         Timestamp ts = doc.getTimestamp("timestamp");
                         if (ts == null) continue;
+
                         Date dateObj = ts.toDate();
-                        String date = new SimpleDateFormat("dd.MM.yyyy", new Locale("uk"))
-                                .format(dateObj);
-                        String time = new SimpleDateFormat("HH:mm", new Locale("uk"))
-                                .format(dateObj);
+                        boolean isFuture = dateObj.after(new Date());
+                        if ((showUpcoming && !isFuture) || (!showUpcoming && isFuture)) continue;
+
+                        String date = new SimpleDateFormat("dd.MM.yyyy", new Locale("uk")).format(dateObj);
+                        String time = new SimpleDateFormat("HH:mm", new Locale("uk")).format(dateObj);
 
                         String serviceName = doc.getString("serviceName");
-                        String status      = doc.getString("status");
-                        String masterId    = doc.getString("masterId");
-                        if (masterId == null) masterId = "";
+                        String status = doc.getString("status");
+                        String masterId = doc.getString("masterId");
 
-                        db.collection("masters").document(masterId)
+                        db.collection("masters").document(masterId != null ? masterId : "")
                                 .get()
                                 .addOnSuccessListener(masterDoc -> {
                                     String masterName = masterDoc.getString("name");
-                                    if (masterName == null) masterName = "";
-
                                     Booking booking = new Booking(
-                                            bookingId,
+                                            doc.getId(),
                                             serviceName != null ? serviceName : "",
-                                            date,
-                                            time,
-                                            masterName,
+                                            date, time,
+                                            masterName != null ? masterName : "",
                                             status != null ? status : ""
                                     );
                                     bookingList.add(booking);
                                     adapter.notifyItemInserted(bookingList.size() - 1);
-                                })
-                                .addOnFailureListener(e -> {
-                                    Log.e("ProfileFragment",
-                                            "Помилка завантаження майстра", e);
                                 });
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("ProfileFragment",
-                            "Не вдалося завантажити записи", e);
-                    Toast.makeText(getContext(),
-                            "Не вдалося завантажити записи",
-                            Toast.LENGTH_SHORT).show();
+                    Log.e("ProfileFragment", "Помилка завантаження записів", e);
+                    Toast.makeText(getContext(), "Не вдалося завантажити записи", Toast.LENGTH_SHORT).show();
                 });
     }
+
 }
