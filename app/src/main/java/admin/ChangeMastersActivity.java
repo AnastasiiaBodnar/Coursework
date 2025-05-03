@@ -130,9 +130,15 @@ public class ChangeMastersActivity extends AppCompatActivity {
                 uploadImageAndSave(data, master);
             } else {
                 if (master == null) {
-                    db.collection("masters").add(data).addOnSuccessListener(doc -> loadMasters());
+                    db.collection("masters").add(data).addOnSuccessListener(doc -> {
+                        Toast.makeText(this, "Майстра додано успішно!", Toast.LENGTH_SHORT).show();
+                        loadMasters();
+                    });
                 } else {
-                    db.collection("masters").document(master.getId()).update(data).addOnSuccessListener(unused -> loadMasters());
+                    db.collection("masters").document(master.getId()).update(data).addOnSuccessListener(unused -> {
+                        Toast.makeText(this, "Дані майстра оновлено!", Toast.LENGTH_SHORT).show();
+                        loadMasters();
+                    });
                 }
             }
         });
@@ -155,9 +161,15 @@ public class ChangeMastersActivity extends AppCompatActivity {
                 ref.getDownloadUrl().addOnSuccessListener(uri -> {
                     data.put("photoURL", uri.toString());
                     if (master == null) {
-                        db.collection("masters").add(data).addOnSuccessListener(doc -> loadMasters());
+                        db.collection("masters").add(data).addOnSuccessListener(doc -> {
+                            Toast.makeText(this, "Майстра додано успішно!", Toast.LENGTH_SHORT).show();
+                            loadMasters();
+                        });
                     } else {
-                        db.collection("masters").document(master.getId()).update(data).addOnSuccessListener(unused -> loadMasters());
+                        db.collection("masters").document(master.getId()).update(data).addOnSuccessListener(unused -> {
+                            Toast.makeText(this, "Фото та дані оновлено!", Toast.LENGTH_SHORT).show();
+                            loadMasters();
+                        });
                     }
                 })
         );
