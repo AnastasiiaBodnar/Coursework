@@ -11,7 +11,6 @@ public class Master {
     private String userId;
     private String specialization;
 
-
     public Master() {}
 
     public Master(String name, String photoURL, List<ScheduleItem> schedule, String category, String specialization, String userId) {

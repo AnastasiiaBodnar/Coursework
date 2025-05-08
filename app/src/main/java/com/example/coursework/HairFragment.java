@@ -13,25 +13,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import models.Service;
 
-public class HairFragment extends Fragment {
-    private FirebaseFirestore db;
+import models.FirebaseService;
+import models.Service;
+import models.ServiceInterface;
+
+public class HairFragment extends Fragment implements ServiceInterface {
+    private FirebaseService service;
     private LinearLayout servicesContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hair, container, false);
-        db = FirebaseFirestore.getInstance();
+        service = FirebaseService.getInstance();
         servicesContainer = view.findViewById(R.id.services);
 
         loadServices();
         return view;
     }
 
-    private void loadServices() {
-        db.collection("services")
+    public void loadServices() {
+        service.getDb().collection("services")
                 .whereEqualTo("category", "hair")
                 .get()
                 .addOnCompleteListener(task -> {
@@ -48,7 +51,7 @@ public class HairFragment extends Fragment {
                 });
     }
 
-    private void addServiceCard(Service service) {
+    public void addServiceCard(Service service) {
         View serviceCard = LayoutInflater.from(getContext())
                 .inflate(R.layout.item_service, servicesContainer, false);
 
@@ -72,7 +75,7 @@ public class HairFragment extends Fragment {
         servicesContainer.addView(serviceCard);
     }
 
-    private void bookService(Service service) {
+    public void bookService(Service service) {
         BookingFragment bookingFragment = new BookingFragment();
 
         Bundle args = new Bundle();
