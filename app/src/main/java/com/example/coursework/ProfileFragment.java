@@ -64,21 +64,38 @@ public class ProfileFragment extends Fragment {
 
         btnUpcoming.setOnClickListener(v -> {
             showUpcoming = true;
+            setButtonStyles();
             loadUserBookings();
         });
 
         btnPast.setOnClickListener(v -> {
             showUpcoming = false;
+            setButtonStyles();
             loadUserBookings();
         });
 
         loadUserProfile();
+        setButtonStyles(); 
         loadUserBookings();
 
         return view;
     }
 
+    private void setButtonStyles() {
+        if (getContext() == null) return;
 
+        if (showUpcoming) {
+            btnUpcoming.setBackgroundColor(getResources().getColor(R.color.button));
+            btnUpcoming.setTextColor(getResources().getColor(R.color.white));
+            btnPast.setBackgroundColor(getResources().getColor(R.color.bag));
+            btnPast.setTextColor(getResources().getColor(R.color.button));
+        } else {
+            btnPast.setBackgroundColor(getResources().getColor(R.color.button));
+            btnPast.setTextColor(getResources().getColor(R.color.white));
+            btnUpcoming.setBackgroundColor(getResources().getColor(R.color.bag));
+            btnUpcoming.setTextColor(getResources().getColor(R.color.button));
+        }
+    }
 
     private void loadUserProfile() {
         String userId = auth.getCurrentUser().getUid();
@@ -152,5 +169,4 @@ public class ProfileFragment extends Fragment {
                     Toast.makeText(getContext(), "Не вдалося завантажити записи", Toast.LENGTH_SHORT).show();
                 });
     }
-
 }

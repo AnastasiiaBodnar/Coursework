@@ -35,9 +35,6 @@ public class Master {
     public void setSchedule(List<ScheduleItem> schedule) { this.schedule = schedule; }
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
     public String getSpecialization() { return specialization; }
-    public void setSpecialization(String specialization) { this.specialization = specialization; }
 
 }

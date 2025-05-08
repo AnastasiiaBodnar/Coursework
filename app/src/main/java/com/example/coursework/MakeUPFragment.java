@@ -91,14 +91,5 @@ public class MakeUPFragment extends Fragment implements ServiceInterface {
                 .commit();
     }
 
-    private boolean isAdmin() {
-        return false;
-    }
-
-    private void showEditDialog(Service service) {
-    }
-
-    private void showDeleteDialog(Service service) {
-    }
 
 }

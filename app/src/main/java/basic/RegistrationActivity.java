@@ -2,6 +2,8 @@ package basic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +43,56 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegister);
 
+        etPhone.setText("+380 ");
+        etPhone.setSelection(etPhone.getText().length());
+
+        etPhone.addTextChangedListener(new TextWatcher() {
+            private boolean isFormatting;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isFormatting) return;
+
+                isFormatting = true;
+
+                String input = s.toString();
+
+                if (!input.startsWith("+380")) {
+                    etPhone.setText("+380 ");
+                    etPhone.setSelection(etPhone.getText().length());
+                    isFormatting = false;
+                    return;
+                }
+
+                String digits = input.replaceAll("[^\\d]", "");
+
+                if (digits.length() > 12) digits = digits.substring(0, 12);
+
+                StringBuilder formatted = new StringBuilder("+380 ");
+
+                if (digits.length() > 3) {
+                    formatted.append(digits.substring(3, Math.min(5, digits.length())));
+                }
+                if (digits.length() > 5) {
+                    formatted.append(" ").append(digits.substring(5, Math.min(8, digits.length())));
+                }
+                if (digits.length() > 8) {
+                    formatted.append(" ").append(digits.substring(8));
+                }
+
+                etPhone.setText(formatted.toString());
+                etPhone.setSelection(etPhone.getText().length());
+
+                isFormatting = false;
+            }
+        });
+
         btnRegister.setOnClickListener(view -> registerUser());
     }
 
@@ -53,6 +105,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (name.isEmpty() || surname.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Будь ласка, заповніть усі поля", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!phone.matches("^\\+380\\s\\d{2}\\s\\d{3}\\s\\d{4}$")) {
+            Toast.makeText(this, "Невірний формат номера. Використовуйте формат: +380 XX XXX XXX", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -26,7 +26,7 @@
         android:textSize="30dp"
         android:layout_marginTop="1dp"
         android:textStyle="bold"
-        android:textColor="@color/logo_text"
+        android:textColor="@color/text"
         android:fontFamily="@font/nyght_serif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,14 +53,20 @@
             android:id="@+id/btnUpcoming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Майбутні" />
+            android:text="Майбутні"
+            android:background="@color/button"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btnPast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Минулі"
-            android:layout_marginStart="16dp"/>
+            android:background="@color/bag"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/button"/>
     </LinearLayout>
 
 
