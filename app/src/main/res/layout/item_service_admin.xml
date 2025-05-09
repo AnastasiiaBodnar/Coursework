@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Редагувати"
-            android:backgroundTint="@color/button"
+            android:backgroundTint="@color/green"
             android:textColor="@android:color/white"/>
 
         <Space

@@ -13,7 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Додати майстра"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nyght_serif"
+        android:background="@drawable/btn_rounded"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

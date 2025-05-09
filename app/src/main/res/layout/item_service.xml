@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:text="Записатися"
         android:fontFamily="@font/nyght_serif"
-        android:background="@drawable/rounded_button" android:textColor="@android:color/white"
+        android:background="@drawable/btn_rounded" android:textColor="@android:color/white"
         android:textStyle="bold"/>
     <View
         android:layout_width="match_parent"

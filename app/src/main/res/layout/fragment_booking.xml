@@ -49,7 +49,7 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:divider="@drawable/divider_vertical"
+                android:divider="@drawable/bg_divider_vertical"
                 android:showDividers="middle"
                 android:paddingVertical="8dp" />
         </HorizontalScrollView>
@@ -76,7 +76,7 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:divider="@drawable/divider_vertical"
+                android:divider="@drawable/bg_divider_vertical"
                 android:showDividers="middle"
                 android:paddingVertical="8dp"
                 android:layout_marginRight="10dp"/>
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/btn_rounded"
             android:enabled="false"
             android:text="Підтвердити запис"
             android:textColor="@android:color/white"

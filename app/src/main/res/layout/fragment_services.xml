@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/service_category_bg"
+            android:background="@drawable/bg_service_category"
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/hair"
+                android:src="@drawable/ic_hair"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"/>
 
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/service_category_bg"
+            android:background="@drawable/bg_service_category"
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
@@ -84,7 +84,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/makeup"
+                android:src="@drawable/ic_makeup"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"/>
 
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/service_category_bg"
+            android:background="@drawable/bg_service_category"
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
@@ -123,7 +123,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/nail"
+                android:src="@drawable/ic_nail"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"/>
 

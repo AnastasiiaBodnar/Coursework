@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="+ Додати послугу"
+        android:text="Додати послугу"
         android:textSize="18sp"
         android:fontFamily="@font/nyght_serif"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/btn_rounded"
         android:textColor="@android:color/white"
         android:layout_marginBottom="20dp" />
 

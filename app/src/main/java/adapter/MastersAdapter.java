@@ -67,11 +67,11 @@ public class MastersAdapter extends RecyclerView.Adapter<MastersAdapter.MasterVi
         if (master.getPhotoURL() != null && !master.getPhotoURL().isEmpty()) {
             Glide.with(context)
                     .load(master.getPhotoURL())
-                    .placeholder(R.drawable.person)
-                    .error(R.drawable.person)
+                    .placeholder(R.drawable.ic_person)
+                    .error(R.drawable.ic_person)
                     .into(holder.masterImageView);
         } else {
-            holder.masterImageView.setImageResource(R.drawable.person);
+            holder.masterImageView.setImageResource(R.drawable.ic_person);
         }
     }
 

@@ -247,14 +247,14 @@ public class BookingFragment extends Fragment {
     }
 
     private void styleDefault(Button btn) {
-        btn.setBackgroundResource(R.drawable.rounded_button);
+        btn.setBackgroundResource(R.drawable.btn_rounded);
         btn.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         btn.setTypeface(ResourcesCompat.getFont(getContext(), R.font.nyght_serif));
         btn.setAllCaps(false);
     }
 
     private void styleSelected(Button btn) {
-        btn.setBackgroundResource(R.drawable.rounded_button_selected);
+        btn.setBackgroundResource(R.drawable.btn_rounded_selected);
         btn.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         btn.setTypeface(ResourcesCompat.getFont(getContext(), R.font.nyght_serif));
         btn.setAllCaps(false);
