@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment {
         });
 
         loadUserProfile();
-        setButtonStyles(); 
+        setButtonStyles();
         loadUserBookings();
 
         return view;
@@ -145,7 +145,6 @@ public class ProfileFragment extends Fragment {
                         String time = new SimpleDateFormat("HH:mm", new Locale("uk")).format(dateObj);
 
                         String serviceName = doc.getString("serviceName");
-                        String status = doc.getString("status");
                         String masterId = doc.getString("masterId");
 
                         db.collection("masters").document(masterId != null ? masterId : "")
@@ -155,9 +154,9 @@ public class ProfileFragment extends Fragment {
                                     Booking booking = new Booking(
                                             doc.getId(),
                                             serviceName != null ? serviceName : "",
-                                            date, time,
-                                            masterName != null ? masterName : "",
-                                            status != null ? status : ""
+                                            date,
+                                            time,
+                                            masterName != null ? masterName : ""
                                     );
                                     bookingList.add(booking);
                                     adapter.notifyItemInserted(bookingList.size() - 1);

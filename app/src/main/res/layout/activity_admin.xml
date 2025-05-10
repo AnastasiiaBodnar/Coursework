@@ -91,31 +91,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/booking_change_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/bg_service_category"
-            android:padding="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/nyght_serif"
-                android:text="Запис"
-                android:textColor="@color/text"
-                android:textSize="24dp" />
-
-
-        </LinearLayout>
         <FrameLayout
             android:id="@+id/adminContainer"
             android:layout_width="match_parent"

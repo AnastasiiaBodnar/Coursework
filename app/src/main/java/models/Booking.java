@@ -6,17 +6,14 @@ public class Booking {
     private String date;
     private String time;
     private String masterName;
-    private String status;
-
     public Booking() {}
 
-    public Booking(String id, String serviceName, String date, String time, String masterName, String status) {
+    public Booking(String id, String serviceName, String date, String time, String masterName) {
         this.id = id;
         this.serviceName = serviceName;
         this.date = date;
         this.time = time;
         this.masterName = masterName;
-        this.status = status;
     }
 
     public String getId() { return id; }
@@ -26,5 +23,4 @@ public class Booking {
     public String getDate() { return date; }
     public String getTime() { return time; }
     public String getMasterName() { return masterName; }
-    public String getStatus() { return status; }
 }

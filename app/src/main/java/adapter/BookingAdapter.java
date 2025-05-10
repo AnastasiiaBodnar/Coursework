@@ -44,13 +44,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         holder.tvServiceName.setText("Послуга: " + booking.getServiceName());
         holder.tvDateTime.setText("Дата: " + booking.getDate() + " • " + booking.getTime());
         holder.tvMaster.setText("Майстер: " + booking.getMasterName());
-        holder.tvStatus.setText("Статус: " + booking.getStatus());
 
-        if ("підтверджено".equalsIgnoreCase(booking.getStatus())) {
-            holder.tvStatus.setTextColor(Color.parseColor("#2E7D32"));
-        } else {
-            holder.tvStatus.setTextColor(Color.parseColor("#D32F2F"));
-        }
 
         holder.btnCancel.setOnClickListener(v -> {
             String bookingId = booking.getId();
@@ -85,7 +79,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             tvServiceName = itemView.findViewById(R.id.tvServiceName);
             tvDateTime    = itemView.findViewById(R.id.tvDateTime);
             tvMaster      = itemView.findViewById(R.id.tvMaster);
-            tvStatus      = itemView.findViewById(R.id.tvStatus);
             btnCancel     = itemView.findViewById(R.id.btnCancel);
         }
     }

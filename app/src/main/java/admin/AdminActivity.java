@@ -43,12 +43,5 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.booking_change_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdminActivity.this, ChangeBookingsActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
